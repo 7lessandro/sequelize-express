@@ -1,6 +1,6 @@
 ### Comandos Sequelize CLI
 
-# Iniciando Projeto
+# Iniciando Projeto Sequelize [Models/Config/Migrations/Seeders]
 ```
 npx sequelize init
 ```
