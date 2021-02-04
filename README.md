@@ -1,4 +1,4 @@
-<center># Comandos Sequelize CLI</center>
+<p align="center"># Comandos Sequelize CLI</p>
 
 ### Iniciando Projeto Sequelize [Models/Config/Migrations/Seeders]
 ```
