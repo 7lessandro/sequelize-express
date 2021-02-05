@@ -1,13 +1,9 @@
 const express = require('express')
-const router = express.Router();
+const UserController = require('./controllers/UserController')
 
-const { User } = require('./')
+// const Op = Sequelize.Op; // biblioteca de operadores
 
-//CONTROLLERS
-
-//MIDDLEWARES
-
-
+const routes = express.Router();
 
 
 
@@ -16,15 +12,7 @@ const { User } = require('./')
 */
 
 //GET
-router.get('/users', (req, res) => {
-    User.create({ name: 'Ale', email: 'ale@hotmail.com', password: '123' });
-    console.log('Olá')
-})
+routes.get('/users', UserController.index)
+routes.post('/users', UserController.store)
 
-//POST
-
-//PUT
-
-//DELETE
-
-module.exports = router;
+module.exports = routes;
