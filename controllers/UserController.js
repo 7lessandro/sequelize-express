@@ -8,9 +8,14 @@ class UserController {
     }
 
     async store(request, response) { //CREATE
-        const { name, email, password } = req.body
-         const user = await User.create({name, email, password})
-         response.json(user)
+        const { name, email, password } = request.body
+         const user = await User.create({ name, email, password })
+
+         if(!user) {
+            response.status(404).json({message: 'error creating user'})
+         } else {
+            response.json(user)
+         }
     }
 
     async show(request, response) { //READ BY ID
@@ -18,7 +23,7 @@ class UserController {
         const user = await User.findOne({ where: {id: id}, attributes: ['id', 'name', 'email']})
         
         if(!user) {
-            response.json({})
+            response.status(404).json({message: 'error querying ID'})
         } else {
             response.json(user)
         }
@@ -27,17 +32,22 @@ class UserController {
     async update(request, response) { //UPDATE
         const { id } = request.params
         const { name, email } = request.body
-        const user = await User.update({name: name, email: email}, { where: {id: id}})
+        const user = await User.update({ name: name, email: email }, { where: {id: id}})
 
         if(user < 1) {
-            response.json({})
+            response.status(404).json({message: 'unable to edit user'})
         } else {
             response.json(user)
         }
     }
 
-    async destroy(request, response) { //DELETE
+    async delete(request, response) { //DELETE
+        const { id } = request.params
+        const user = await User.destroy({ where: {id: id} })
         
+        if(user < 1) {
+            response.status(404).json({message: 'could not delete user'})
+        }
     }
 }
 
